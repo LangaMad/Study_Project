@@ -14,13 +14,13 @@
 
 Установка:
 
-  1.Репозиторий - git@github.com:LangaMad/Study_Project.git
-  2.Зависимости - pip install -r requirements.txt
-  3.Сделайте миграции (без базы данных)
+
+- Репозиторий - git@github.com:LangaMad/Study_Project.git
+- Зависимости - pip install -r requirements.txt
+- Сделайте миграции (без базы данных)
   python manage.py makemigrations
   python manage.py migrate
-
-  4.Запуск - python manage.py runserver
+- Запуск - python manage.py runserver
 После перейти по ссылке кторая появится
 
 
