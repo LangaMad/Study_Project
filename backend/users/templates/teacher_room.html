@@ -2,7 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Список учеников</title>
+
+     <h1>Список учеников</h1>
+    <form method="GET" action="{% url 'teacher_room' %}">
+  <input type="text" name="query" placeholder="Поиск по ФИО">
+  <button type="submit">Поиск</button>
+</form>
+
+  <ul>
+    {% for student in students %}
+      <li>
+        <a href="{% url 'view_student' student.id %}">{{ student.name }}</a>
+        <a href="{% url 'update_student' student.id %}">Редактировать</a>
+        <a href="{% url 'delete_student' student.id %}">Удалить</a>
+      </li>
+    {% empty %}
+      <li>Нет доступных учеников</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'create_student' %}">Добавить ученика</a>
+
 </head>
 <body>
 

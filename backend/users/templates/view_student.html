@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Информация ученика</title>
+
+    <h1>Информация об ученике</h1>
+  <p>Имя: {{ student.name }}</p>
+  <p>Почта: {{ student.email }}</p>
+  <p>Дата рождения: {{ student.birth_date }}</p>
+  <p>Класс: {{ student.grade }}</p>
+  <p>Адрес: {{ student.address }}</p>
+  <p>Пол: {{ student.gender }}</p>
+  <a href="{% url 'update_student' student.id %}">Редактировать</a>
+  <a href="{% url 'delete_student' student.id %}">Удалить</a>
+  <a href="{% url 'teacher_room' %}">К списку</a>
+
+
+
+
+</head>
+<body>
+
+</body>
+</html>
