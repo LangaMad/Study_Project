@@ -65,6 +65,7 @@ class Classroom(models.Model):
 
 class Student (models.Model):
     name = models.CharField('Имя', max_length=100)
+    email = models.EmailField('Почта', unique= True)
     surname = models.CharField('Фамилия', max_length=100)
     father_name = models.CharField('Отчество', max_length=100)
     birth_d = models.DateField('День Рождения')
