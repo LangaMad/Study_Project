@@ -29,6 +29,9 @@ class LoginView(FormView):
                 return HttpResponse('Ваш аккаунт неактивен')
         return HttpResponse('Такого юзера не существует')
 
-
+class UserRegisterView(CreateView):
+    template_name = 'register.html'
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('register_done')
 
 
