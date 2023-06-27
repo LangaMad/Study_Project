@@ -6,11 +6,15 @@ from django.views.generic import (
 from django.contrib.auth import login,authenticate,logout
 from  django.http import HttpResponse
 from django.urls import reverse_lazy
-
-# Create your views here.
-
 from .form import LoginForm, UserRegisterForm
 # Create your views here.
+
+
+
+
+class IndexPage(TemplateView):
+    template_name = "index.html"
+
 
 class LoginView(FormView):
     template_name = 'login.html'
@@ -18,9 +22,9 @@ class LoginView(FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-        email = data['email']
+        phone = data['phone']
         password = data['password']
-        user = authenticate(email=email, password=password)
+        user = authenticate(phone=phone, password=password)
         if user is not None:
             if user.is_active:
                 login(self.request, user)
@@ -32,6 +36,13 @@ class LoginView(FormView):
 class UserRegisterView(CreateView):
     template_name = 'register.html'
     form_class = UserRegisterForm
-    success_url = reverse_lazy('register_done')
+    success_url = reverse_lazy('teacher_room')
+
+
+
+def UserLogout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('index')
 
 
