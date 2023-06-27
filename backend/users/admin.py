@@ -22,6 +22,7 @@ class StudentAdmin(admin.ModelAdmin):
         'id',
         'name',
         'surname',
+        'email',
         'father_name',
         'birth_d',
         'student_class',
