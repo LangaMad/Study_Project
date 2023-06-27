@@ -39,4 +39,8 @@ class LoginForm(AuthenticationForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['name', 'email', 'birth_date', 'grade', 'address', 'gender']
+        fields = ['name', 'father_name', 'surname', 'email', 'birth_d', 'gender', 'student_class', 'address']
+
+class EmailForm(forms.Form):
+    subject = forms.CharField(label='Тема', max_length=100)
+    message = forms.CharField(label='Сообщение', widget=forms.Textarea)

@@ -41,8 +41,6 @@ class Teacher(AbstractUser):
         max_length=10
     )
 
-    def __str__(self):
-        return self.name
 
     class Meta:
         verbose_name="Учитель"
