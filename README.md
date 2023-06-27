@@ -9,12 +9,19 @@
 - Интерфейс администратора для управления моделями данных
 
 
-- Python 3.x
+- Python 3.1
 - Django 4.2
 
 Установка:
 
-Репозиторий - 
+Репозиторий - git@github.com:LangaMad/Study_Project.git
+Зависимости - pip install -r requirements.txt
+Сделайте миграции (без базы данных)
+python manage.py makemigrations
+python manage.py migrate
+
+Запуск - python manage.py runserver
+После перейти по ссылке кторая появится
 
 
 
