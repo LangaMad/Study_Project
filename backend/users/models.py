@@ -19,7 +19,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         """
-        Create and save a SuperUser with the given email and password.
+
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -32,6 +32,8 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class Teacher(AbstractUser):
+    username = models.CharField('ФИО препадователя', max_length=100 , unique= True)
+    email = models.EmailField('Почта препадователя', unique=True)
     teacher_subject = models.CharField("Предмет", max_length=15,unique=True)
     phone = models.CharField(
         'Номер Телефона',
@@ -65,7 +67,7 @@ class Classroom(models.Model):
 
 class Student (models.Model):
     name = models.CharField('Имя', max_length=100)
-    email = models.EmailField('Почта', unique= True)
+    email = models.EmailField('Почта',unique=True)
     surname = models.CharField('Фамилия', max_length=100)
     father_name = models.CharField('Отчество', max_length=100)
     birth_d = models.DateField('День Рождения')
