@@ -9,7 +9,6 @@ class TeacherAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'teacher_subject',
-        'teacher_class',
         'phone',
 
 
@@ -40,7 +39,7 @@ class ClassroomAdmin(admin.ModelAdmin):
         'id',
         'name',
         'teacher',
-        'student',
+
 
 
 

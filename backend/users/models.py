@@ -33,13 +33,14 @@ class UserManager(BaseUserManager):
 
 class Teacher(AbstractUser):
     teacher_subject = models.CharField("Предмет", max_length=15,unique=True)
-    teacher_class = models.CharField("Класс", unique=True)
     phone = models.CharField(
         'Номер Телефона',
         null=True,
         max_length=10
     )
 
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name="Учитель"
@@ -50,39 +51,52 @@ class Teacher(AbstractUser):
 
 
 
-class Student (models.Model):
-    name = models.CharField('Имя', max_length=100)
-    surname = models.CharField('Фамилия', max_length=100)
-    father_name = models.CharField('Отчество', max_length=100)
-    birth_d = models.DateField('День Рождения')
-    student_class = models.ForeignKey(Teacher,on_delete=models.CASCADE)
-    address = models.CharField('Адрес', max_length=100)
-    GENDER_CHOICES = (
-        ('M', 'Мужской'),
-        ('F', 'Женский'),
-    )
-    photo = models.ImageField('Фото', upload_to='student_photos', blank=True)
-
-
-
-    class Meta:
-        verbose_name="Ученик"
-        verbose_name_plural ="Ученики"
-
-
 class Classroom(models.Model):
     name = models.CharField('Название класса', max_length=100)
-    teacher = models.OneToOneField(Teacher, on_delete= models.CASCADE)
-    student = models.ForeignKey(Student,on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete= models.CASCADE , related_name='classes')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name="Класс"
         verbose_name_plural ="Классы"
 
 
+class Student (models.Model):
+    name = models.CharField('Имя', max_length=100)
+    surname = models.CharField('Фамилия', max_length=100)
+    father_name = models.CharField('Отчество', max_length=100)
+    birth_d = models.DateField('День Рождения')
+    student_class = models.ForeignKey(Classroom,on_delete=models.CASCADE, related_name='student_class')
+    address = models.CharField('Адрес', max_length=100)
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    photo = models.ImageField(upload_to='student_photos', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name="Ученик"
+        verbose_name_plural ="Ученики"
+
+
+
+
+
+
+
 class School(models.Model):
     name = models.CharField('Название Школы', max_length=100)
-    classrooms = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    classrooms = models.ForeignKey(Classroom, on_delete=models.CASCADE, related_name='school_class')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = "Школа"
