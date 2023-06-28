@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -86,14 +87,24 @@ DEFAULT_FROM_EMAIL = 'artykovh@gmail.com'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': "school",
+#         'USER': "school2_user",
+#         "PASSWORD": "qwerty123",
+#         "HOST": "127.0.0.1",
+#         "PORT": "5432"
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "school",
-        'USER': "school2_user",
-        "PASSWORD": "qwerty123",
-        "HOST": "127.0.0.1",
-        "PORT": "5432"
+        'NAME': os.getenv('POSTGRES_DB', default="school"),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', default="qwerty123"),
+        'USER': os.getenv('POSTGRES_USER', default="school2_user"),
+        'HOST': os.getenv('POSTGRES_HOST', default="db"),
+        'PORT': os.getenv('POSTGRES_PORT', default=5432),
     }
 }
 
